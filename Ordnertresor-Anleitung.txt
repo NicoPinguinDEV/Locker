@@ -1,0 +1,95 @@
+ORDNERTRESOR - KURZANLEITUNG
+
+Ordner sperren
+  Ordnertresor.exe starten, den Ordner ins Fenster ziehen und ein Passwort festlegen.
+  Aus dem Ordner wird eine verschlüsselte Datei "Name.tresor". Der Ordner selbst verschwindet.
+
+Ordner öffnen
+  Die .tresor-Datei ins Fenster ziehen und das Passwort eingeben.
+  Der Ordner ist dann wieder normal da und öffnet sich im Explorer.
+  Die .tresor-Datei bleibt dabei erhalten. Ein offener Ordner braucht also doppelten Speicher.
+
+Wiederherstellungscode
+  Beim ersten Sperren zeigt die App einmalig einen Code. Schreibe ihn auf Papier und bewahre ihn
+  getrennt vom PC auf. Wer ihn hat, braucht dein Passwort nicht.
+  Passwort vergessen: Beim Öffnen auf "Passwort vergessen?" klicken und den Code eingeben.
+  Ändern: Rechtsklick auf einen gesperrten Tresor in "Meine Tresore".
+  Achtung: Backups behalten das alte Passwort und den alten Code.
+  Alte Tresore bekommen das neue Format mit Code, sobald du sie öffnest und wieder sperrst.
+
+Wieder sperren (wichtig!)
+  Solange ein Ordner entsperrt ist, kann ihn jeder lesen.
+  Wenn du fertig bist: Den Tresor in "Meine Tresore" auswählen und "Wieder sperren" klicken,
+  oder "Alle sperren". Das braucht kein Passwort und ist schnell, wenn nichts geändert wurde.
+  Änderungen werden automatisch neu verschlüsselt, der alte Stand wird erst danach ersetzt.
+
+Automatisch sperren
+  Unten im Fenster wählbar: nach 5 bis 60 Minuten ohne Eingabe und beim Windows-Sperrbildschirm.
+  Standard ist aus. Das funktioniert nur, solange die App geöffnet ist. Ist eine Datei gerade
+  in einem Programm geöffnet, bleibt der Ordner offen, und die Statuszeile meldet das.
+
+Meine Tresore
+  Die Liste zeigt jeden Tresor, den du mit der App bearbeitet hast, mit Status und letzter Prüfung.
+  "Verändert" heißt: Die Datei wurde außerhalb der App geändert. Prüfe sie dann.
+  "Fehlt" heißt: Die Datei wurde verschoben oder gelöscht.
+  "Aus Liste" entfernt nur den Eintrag, nie den Tresor.
+
+Security Center
+  Zeigt den Sicherheitszustand. Starte den vollständigen Check und arbeite die Warnungen ab.
+  SICHER: Alle überprüfbaren wichtigen Prüfungen sind bestanden. Das ist keine Garantie.
+  WARNUNG: Eine wichtige Maßnahme fehlt, meist ein Backup.
+  KRITISCH: Etwas ist beschädigt, fehlt oder liegt unverschlüsselt herum.
+  UNBEKANNT: Eine Prüfung lief noch nicht oder war nicht möglich.
+  Ein Scan ändert keine Tresore, Backups oder Dateien und braucht kein Passwort.
+  Die Stärke deines Passworts kann die App nicht prüfen.
+
+Protokoll (im Security Center)
+  Zeigt Sicherheitsereignisse wie Sperren, Fehlversuche und Prüfungen. Es enthält nur Tresornamen,
+  keine Passwörter oder Inhalte. Es macht viele Änderungen sichtbar, ist aber nicht fälschungssicher.
+
+Doppelklick und Rechtsklick
+  Den Haken unten in der App setzen. Danach öffnen sich Tresore per Doppelklick,
+  und Ordner haben im Rechtsklick-Menü "Mit Passwort sperren".
+  Lege die EXE vorher an ihren endgültigen Platz. Wird sie verschoben, Haken neu setzen.
+
+Bitte beachten
+  - Passwort UND Wiederherstellungscode weg = Dateien für immer verloren.
+  - Die .tresor-Datei ist lesegeschützt, aber nicht löschgeschützt. Mache Sicherungskopien.
+  - Der Ordnername bleibt am Dateinamen des Tresors sichtbar. Inhalt und Dateinamen nicht.
+  - Originale werden normal gelöscht. Auf Festplatten (HDD) lassen sie sich dann mit
+    Spezialprogrammen oft wiederherstellen, auf SSDs meist nicht, aber auch das ist
+    nicht garantiert. Beim Sperren kannst du sie zusätzlich überschreiben lassen,
+    das dauert deutlich länger und wirkt vor allem auf HDDs.
+    Am sichersten: Geheime Dateien von Anfang an nur in gesperrten Ordnern halten.
+  - Windows kann Spuren anlegen (Vorschaubilder, "Zuletzt verwendet").
+  - Bei OneDrive können ältere Versionen im Online-Papierkorb bleiben.
+  - Ordnerrechte (ACLs) werden nicht gespeichert.
+  - Ordner mit Symlinks/Junctions, Laufwerke und Systemordner werden abgelehnt.
+
+Technik
+  AES-256-GCM, Schlüsselableitung Argon2id (512 MiB). Der genaue Aufbau steht in FORMAT.md im Projekt.
+  Originale werden erst gelöscht, wenn der Tresor am Windows-Cache vorbei zurückgelesen,
+  jede Datei gegen ihre Prüfsumme geprüft wurde und sich am Ordner nichts geändert hat.
+  Ein Tresor wird erst gelöscht, wenn alle Dateien auf dem Datenträger stehen und
+  zurückgelesen wurden.
+
+Tresor prüfen
+  Der Button "Tresor prüfen" entschlüsselt den Tresor testweise und verändert nichts.
+  Ist er beschädigt, bietet die App an, alles Unversehrte in einen neuen Ordner zu retten.
+  Dateien mit Schäden werden nicht angelegt, sondern gemeldet. Weitere Dateien können fehlen.
+  Eine Rettung ersetzt keine Sicherungskopie: Schäden am Dateianfang sind nicht rettbar.
+
+Backups
+  Tresor auswählen, "Backups" klicken und ein Ziel hinzufügen, am besten einen externen
+  Datenträger, den du danach abziehst. Ein Backup braucht kein Passwort und enthält keinen
+  Klartext. Es ist eine Vollkopie: Jede Version belegt so viel Platz wie der Tresor.
+  "Datei prüfen" erkennt Beschädigungen. "Inhalt prüfen" entschlüsselt mit Passwort und zeigt,
+  dass sich das Backup wirklich öffnen lässt. Mach das mindestens einmal.
+  Wiederherstellen überschreibt nie etwas. Auf einem anderen PC: "Ordner durchsuchen".
+  Das Backup gehört zum selben Passwort: Ohne Passwort ist auch das Backup verloren.
+  Empfehlung: 3 Kopien, auf 2 Medien, 1 davon an einem anderen Ort.
+  Zeitpläne greifen nur, wenn die App geöffnet ist.
+
+Nach einem Absturz
+  Beim nächsten Start meldet die App unterbrochene Vorgänge und fragt, was passieren soll.
+  Unverschlüsselte Reste werden erst entfernt, wenn der Tresor vollständig geprüft wurde.
